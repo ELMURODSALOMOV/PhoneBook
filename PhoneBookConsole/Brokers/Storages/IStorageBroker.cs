@@ -7,7 +7,7 @@ namespace PhoneBookConsole.Brokers.Storages
         Contact InsertContact(Contact contact);
         bool DeleteContact(string phone);
         bool UpdateContact(Contact contact);
-        string GetAllContact();
+        Contact[] GetAllContact();
         Contact GetContact(string phone);
     }
 }
