@@ -43,10 +43,27 @@ namespace PhoneBookConsole.Brokers.Storages
             return false;
         }
 
-        public string GetAllContact()
+        public Contact[] GetAllContact()
         {
-            string contactInfo = File.ReadAllText(filePath);
-            return contactInfo;
+            string[] contactLines = File.ReadAllLines(filePath);
+
+            Contact[] contacts = new Contact[contactLines.Length];
+            for (int itaration = 0; itaration < contactLines.Length; itaration++)
+            {
+                string contactLine = contactLines[itaration];
+                string[] contactProperties = contactLine.Split('*');
+
+                Contact contact = new Contact()
+                {
+                    Id = Convert.ToInt32(contactProperties[0]),
+                    Name = contactProperties[1],
+                    Phone = contactProperties[2]
+                };
+
+                contacts[itaration] = contact;
+            }
+
+            return contacts;
         }
 
         public Contact GetContact(string phone)
